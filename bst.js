@@ -77,6 +77,27 @@ class Bst {
     }
   }
 
+
+  findSecLargest(root){
+    let curr = root;
+    let parent = null
+    while(curr.right){
+      parent = curr;
+      curr = curr.right
+    }
+
+    if(curr.left){
+      curr = curr.left
+      while(curr.right){
+        curr = curr.right
+      }
+
+      return curr.value
+    }
+
+    return parent ? parent.value : null
+  }
+
 }
 
 const bst = new Bst();
@@ -87,7 +108,10 @@ bst.insert(30);
 bst.insert(10);
 bst.insert(50);
 bst.insert(70);
+bst.insert(65)
 
-bst.delete(40)
+// bst.delete(40)
 
 bst.inOrder(bst.root)
+
+console.log("secLarge: ", bst.findSecLargest(bst.root));
