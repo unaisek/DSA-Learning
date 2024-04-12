@@ -98,6 +98,24 @@ class Bst {
     return parent ? parent.value : null
   }
 
+  findLCA(root, value1, value2){
+    if(!root){
+      return null
+    }
+    if(value1 === root.value || value2 === root.value){
+      return root.value
+    }
+
+    const leftLCA = this.findLCA(root.left, value1, value2);
+    const rightLCA = this.findLCA(root.right, value1, value2)
+
+    if(leftLCA && rightLCA) {
+      return root.value
+    }
+
+    return leftLCA || rightLCA
+  }
+
 }
 
 const bst = new Bst();
@@ -115,3 +133,5 @@ bst.insert(65)
 bst.inOrder(bst.root)
 
 console.log("secLarge: ", bst.findSecLargest(bst.root));
+
+console.log(bst.findLCA(bst.root,10, 65 ));
