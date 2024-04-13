@@ -67,6 +67,27 @@ class MinHeap{
     return result
   }
 
+  delete(){
+    let removeValue = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.heapifyDown(0)
+  }
+
+  heapifyDown(index){
+    let smallest = index;
+    if(this.hasLeftChild && this.getLeftChildValue(index) < this.heap[smallest]){
+      smallest = this.getLeftChildIndex(index)
+    }
+    if(this.hasRightChild && this.getRightChildValue(index) < this.heap[smallest]){
+      smallest = this.getRightChildIndex(index)
+    }
+
+    if(index !== smallest){
+      this.swap(index, smallest);
+      this.heapifyDown(smallest)
+    }
+  }
+
   display(){
     return console.log(this.heap);
   }
@@ -79,6 +100,8 @@ minHeap.insert(30);
 minHeap.insert(10);
 minHeap.insert(25)
 minHeap.insert(60);
+minHeap.delete()
 minHeap.display()
 console.log(minHeap.allAboveNode(60));
+
 
