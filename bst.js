@@ -134,4 +134,4 @@ bst.inOrder(bst.root)
 
 console.log("secLarge: ", bst.findSecLargest(bst.root));
 
-console.log(bst.findLCA(bst.root,10, 65 ));
+console.log(bst.findLCA(bst.root,10,65));
