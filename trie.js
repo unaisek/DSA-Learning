@@ -45,9 +45,23 @@ class Trie{
     return result
   }
 
+  LCP(){
+    let node = this.root;
+    let prefix = "";
+    while(Object.keys(node.children).length === 1 && !node.isEnd){
+      const char = Object.keys(node.children)[0];
+      prefix += char;
+      node = node.children[char]
+    }
+    return prefix
+  }
+
 }
 
 const trie = new Trie()
-trie.insert("arif");
-trie.insert("abdul");
-console.log(trie.findWords("a"));
+trie.insert("abdul rafi");
+trie.insert("abdul rauf");
+trie.insert("abdul raheem")
+// console.log(trie.findWords("a"));
+
+console.log(trie.LCP());
