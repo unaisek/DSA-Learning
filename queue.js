@@ -5,41 +5,50 @@ class Node {
   }
 }
 
-class Queue{
+class Queue {
   constructor() {
     this.front = null;
-    this.rear = null
+    this.rear = null;
   }
 
-  enqueue(value){
+  enqueue(value) {
     const node = new Node(value);
-    if(!this.front){
+    if (!this.front) {
       this.front = node;
-      this.rear = node
+      this.rear = node;
     }
     this.rear.next = node;
-    this.rear = node
+    this.rear = node;
   }
 
-  dequeue(){
-    if(this.front == null){
-      return null
+  dequeue() {
+    if (this.front == null) {
+      return null;
     }
     let removedValue = this.front.value;
     this.front = this.front.next;
-    return removedValue
+    return removedValue;
   }
 
-  print(){
+  print() {
     let curr = this.front;
-    let value = ''
-    while(curr){
+    let value = "";
+    while (curr) {
       value += `${curr.value} `;
-      curr = curr.next
+      curr = curr.next;
     }
     console.log(value);
   }
 
+  reverse(queue) {
+    let arr = [];
+    if (this.front == null) {
+      return;
+    }
+    let front = queue.dequeue();
+    this.reverse(queue);
+    queue.enqueue(front);
+  }
 }
 
 const queue = new Queue();
@@ -48,6 +57,6 @@ queue.enqueue(30);
 queue.enqueue(10);
 queue.enqueue(60);
 queue.enqueue(50);
-
+queue.reverse(queue)
 queue.print()
 
