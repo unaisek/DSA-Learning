@@ -53,12 +53,31 @@ class Graph{
     }
     return false
   }
+
+  bfs(startVertex){
+    let visited = new Set();
+    let queue = [startVertex];
+    visited.add(startVertex);
+    while(queue.length){
+      let current = queue.shift();
+      console.log(current);
+
+      for(let neighbour of this.adjacenyList[current]){
+        if(!visited.has(neighbour)){
+          queue.push(neighbour);
+          visited.add(neighbour)
+        }
+      }
+    }
+  }
 }
 
 const graph = new Graph();
-// graph.addEdges(10, 20);
+graph.addEdges(10, 20);
 graph.addVertex(50);
 graph.addVertex(100);
-// graph.addEdges(10, 100);
+graph
+graph.addEdges(10, 100);
 graph.print()
 console.log(graph.hasCyclic());
+graph.bfs(100)
