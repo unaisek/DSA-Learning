@@ -56,11 +56,12 @@ class Graph{
 
   bfs(startVertex){
     let visited = new Set();
+    let result =[]
     let queue = [startVertex];
     visited.add(startVertex);
     while(queue.length){
       let current = queue.shift();
-      console.log(current);
+      result.push(current)
 
       for(let neighbour of this.adjacenyList[current]){
         if(!visited.has(neighbour)){
@@ -69,15 +70,43 @@ class Graph{
         }
       }
     }
+    return result
+  }
+
+  dfs(startVertex){
+    const stack = [startVertex];
+    const visited = new Set();
+    const result =[];
+    while(stack.length){
+      const vertex = stack.pop();
+      if(!visited.has(vertex)){
+        visited.add(vertex);
+        result.push(vertex);
+
+        for(const neighbour of this.adjacenyList[vertex]){
+          stack.push(neighbour)
+        }
+      }
+    }
+    return result;
   }
 }
 
 const graph = new Graph();
-graph.addEdges(10, 20);
-graph.addVertex(50);
-graph.addVertex(100);
-graph
-graph.addEdges(10, 100);
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+
+graph.addEdges("A", "B");
+graph.addEdges("A", "D");
+graph.addEdges("B", "C");
+graph.addEdges("B", "E");
+graph.addEdges("D", "E");
+graph.addEdges("F", "E");
+
 graph.print()
-console.log(graph.hasCyclic());
-graph.bfs(100)
+console.log(graph.dfs("A"));
+console.log(graph.bfs("A"));
