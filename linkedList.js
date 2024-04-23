@@ -5,77 +5,86 @@ class Node {
    }
 }
 
-class LinkedList{
-    constructor() {
-      this.head = null
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  prepend(value) {
+    const node = new Node(value);
+    if (this.head == null) {
+      this.head = node;
+    } else {
+      node.next = this.head;
+      this.head = node;
     }
+  }
 
-    prepend(value){
-        const node = new Node(value);
-        if(this.head == null){
-          this.head = node
-        } else {
-          node.next = this.head;
-          this.head = node
-        }
-    }
-
-    append(value){
-      const node = new Node(value);
-      if(!this.head){
-        this.head = node
-      } else {
-        let prev = this.head;
-        while(prev.next){
-          prev = prev.next
-        }
-        prev.next = node
-      }
-
-
-    }
-
-    print(){
-        let listValue = "";
-        let current = this.head;
-        while(current){
-          listValue += `${current.value} `;
-          current = current.next
-        }
-        console.log(listValue);
-    }
-
-    remove(value){
-      if(!this.head){
-        return null
-      } 
-      if(this.head.value === value){
-        this.head.next = this.head
-      }
+  append(value) {
+    const node = new Node(value);
+    if (!this.head) {
+      this.head = node;
+    } else {
       let prev = this.head;
-      while(prev.next && prev.next.value !==  value){
-        prev = prev.next
+      while (prev.next) {
+        prev = prev.next;
       }
+      prev.next = node;
+    }
+  }
 
-      if(prev.next){
-        let removeNode = prev.next;
-        prev.next = removeNode.next;
-        return removeNode.value
-        
-      }
+  print() {
+    let listValue = "";
+    let current = this.head;
+    while (current) {
+      listValue += `${current.value} `;
+      current = current.next;
     }
-    reverse(){
-      let prev = null;
-      let curr = this.head;
-      while(curr){
-        let next = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = next
-        
-      }
-      this.head = prev
+    console.log(listValue);
+  }
+
+  remove(value) {
+    if (!this.head) {
+      return null;
     }
+    if (this.head.value === value) {
+      this.head.next = this.head;
+    }
+    let prev = this.head;
+    while (prev.next && prev.next.value !== value) {
+      prev = prev.next;
+    }
+
+    if (prev.next) {
+      let removeNode = prev.next;
+      prev.next = removeNode.next;
+      return removeNode.value;
+    }
+  }
+  reverse() {
+    let prev = null;
+    let curr = this.head;
+    while (curr) {
+      let next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    this.head = prev;
+  }
+
+  reverseRec() {
+    this.head = this.recursiveReverse(this.head);
+  }
+  recursiveReverse(node) {
+    if (!node || !node.next) {
+      return node;
+    }
+    let reversedHead = this.recursiveReverse(node.next);
+    node.next.next = node;
+    node.next = null;
+    return reversedHead;
+  }
 }
 
 const list = new LinkedList();
