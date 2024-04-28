@@ -116,6 +116,20 @@ class Bst {
     return leftLCA || rightLCA
   }
 
+  levelOrder(root){
+    const queue = [root]
+    while(queue.length){
+      let node = queue.pop();
+      console.log(node.value);
+      if(node.left){
+        queue.unshift(node.left)
+      }
+      if(node.right){
+        queue.unshift(node.right)
+      }
+    }
+  }
+
 }
 
 const bst = new Bst();
@@ -135,3 +149,4 @@ bst.inOrder(bst.root)
 console.log("secLarge: ", bst.findSecLargest(bst.root));
 
 console.log(bst.findLCA(bst.root,10,65));
+bst.levelOrder(bst.root)
